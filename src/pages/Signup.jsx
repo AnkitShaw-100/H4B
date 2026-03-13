@@ -57,7 +57,7 @@ const HospitalSignup = () => {
       });
 
       alert("Hospital registration successful!");
-      navigate("/dashboard");
+      navigate("/doctor-dashboard");
     } catch (error) {
       setError(error.message);
     } finally {

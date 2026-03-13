@@ -1,21 +1,21 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Services from "./components/services";
-import Testimonial from "./components/testimonial";
-import Footer from "./components/footer";
-import Login from "./components/login";
-import AboutUS from "./components/aboutUs";
-import Signup from "./components/signup";
-import GetStarted from "./components/vaccinationPage";
-import ContactUs from "./components/contactUs";
-import DoctorDashboard from "./components/DoctorDashboard";
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Testimonial from "./pages/Testimonial";
+import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import AboutUS from "./pages/AboutUs";
+import Signup from "./pages/Signup";
+import GetStarted from "./pages/VaccinationPage";
+import ContactUs from "./pages/ContactUs";
+import DoctorDashboard from "./pages/DoctorDashboard";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase";
-import ChildPage from "./components/ChildPage";
-import VaccineEducation from "./components/VaccineEducation";
-import ImmunizationTracking from "./components/ImmunizationTrackingPage";
-import AffordableImmunization from "./components/Affordable";
+import ChildPage from "./pages/ChildPage";
+import VaccineEducation from "./pages/VaccineEducation";
+import ImmunizationTracking from "./pages/ImmunizationTrackingPage";
+import AffordableImmunization from "./pages/Affordable";
 
 const App = () => {
 

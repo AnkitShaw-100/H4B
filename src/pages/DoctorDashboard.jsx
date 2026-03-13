@@ -1,4 +1,4 @@
-import SearchUser from './SearchUser';
+import SearchUser from '../components/SearchUser';
 
 export default function DoctorDashboard() {
   const stats = [

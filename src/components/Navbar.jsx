@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../assets/Logo.jpg";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
@@ -16,11 +15,6 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 ">
           {/* Logo and Brand */}
           <div className="flex items-center">
-            <img
-              src={logo}
-              alt="Shishu Card Logo"
-              className="h-10 w-10 rounded-xl"
-            />
             <Link to="/" className="ml-2 text-xl font-semibold text-white">
               Shishu<span className="text-blue-200">Card</span>
             </Link>
@@ -46,12 +40,6 @@ const Navbar = () => {
             >
               About
             </Link>
-            <Link
-              to="/contact"
-              className="text-blue-100 hover:text-white px-3 py-2 text-sm font-medium transition-colors"
-            >
-              Contact
-            </Link>
             <div className="ml-2">
               {user ? <LogoutButton /> : <LoginButton />}
             </div>
@@ -66,12 +54,32 @@ const Navbar = () => {
             >
               <span className="sr-only">Open menu</span>
               {!menuOpen ? (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               ) : (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               )}
             </button>
@@ -80,7 +88,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`md:hidden ${menuOpen ? 'block' : 'hidden'}`}>
+      <div className={`md:hidden ${menuOpen ? "block" : "hidden"}`}>
         <div className="px-2 pb-3 space-y-1 bg-blue-700">
           <Link
             to="/"
@@ -102,13 +110,6 @@ const Navbar = () => {
             onClick={() => setMenuOpen(false)}
           >
             About
-          </Link>
-          <Link
-            to="/contact"
-            className="text-white hover:bg-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
           </Link>
           <div className="px-3 py-2">
             {user ? <LogoutButton mobile /> : <LoginButton mobile />}

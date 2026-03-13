@@ -4,7 +4,7 @@ import ChildProfile from './ChildProfile';
 import { getChildByChildId } from '../utils/findUser';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase";
-import VaccineModal from './UpdateForm';
+import VaccineModal from '../components/UpdateForm';
 import { ref, set } from 'firebase/database';
 import { FaUserEdit, FaSpinner, FaArrowLeft } from 'react-icons/fa';
 
