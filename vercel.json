@@ -1,4 +1,10 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV": "production",
+    "NODE_OPTIONS": "--max-old-space-size=2048"
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
