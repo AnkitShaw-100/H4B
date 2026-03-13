@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 import { getMessaging } from "firebase/messaging";
 
 const firebaseConfig = {
@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getDatabase(app, import.meta.env.VITE_FIREBASE_DATABASE_URL);
 const messaging = getMessaging(app);
 
 export { app, auth, db, messaging };

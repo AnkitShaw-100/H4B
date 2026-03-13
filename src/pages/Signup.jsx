@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { FaUser, FaLock, FaArrowRight, FaHospital, FaIdCard } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaHospital, FaIdCard } from "react-icons/fa";
 
 const HospitalSignup = () => {
   const [hospitalData, setHospitalData] = useState({
@@ -66,47 +66,46 @@ const HospitalSignup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100">
       {/* Decorative elements */}
-      <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-blue-200 opacity-20"></div>
-      <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-blue-300 opacity-20"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-blue-300 opacity-10 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-blue-400 opacity-10 blur-3xl"></div>
 
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-2xl relative z-10">
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-blue-50">
           {/* Header */}
-          <div className="bg-blue-600 py-6 px-8 text-center">
-            <h1 className="text-2xl font-bold text-white">Hospital Registration</h1>
-            <p className="text-blue-100 mt-1">Register your healthcare facility</p>
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 py-8 px-8 text-center">
+            <h1 className="text-3xl font-bold text-white mb-2">Hospital Registration</h1>
+            <p className="text-blue-100 text-sm">Register your healthcare facility</p>
           </div>
 
           {/* Form */}
-          <div className="p-8">
+          <div className="p-8 space-y-6">
             {error && (
-              <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
-                {error}
+              <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-medium flex items-start">
+                <span className="mr-3">⚠️</span>
+                <div>{error}</div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit}>
-              {/* Hospital Info Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Hospital Name & License Row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Hospital Name */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-semibold text-gray-700">
                     Hospital Name
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaHospital className="text-gray-400" />
-                    </div>
+                    <FaHospital className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
                     <input
                       type="text"
                       name="name"
                       value={hospitalData.name}
                       onChange={handleChange}
-                      placeholder="Hospital Name"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="e.g., City General Hospital"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                       required
                     />
                   </div>
@@ -114,20 +113,18 @@ const HospitalSignup = () => {
 
                 {/* License Number */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    License No.
+                  <label className="block text-sm font-semibold text-gray-700">
+                    License Number
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaIdCard className="text-gray-400" />
-                    </div>
+                    <FaIdCard className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
                     <input
                       type="text"
                       name="licenseNumber"
                       value={hospitalData.licenseNumber}
                       onChange={handleChange}
-                      placeholder="License Number"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="e.g., REG/HOS/2024/12345"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                       required
                     />
                   </div>
@@ -135,44 +132,40 @@ const HospitalSignup = () => {
               </div>
 
               {/* Email Field */}
-              <div className="space-y-2 mb-5">
-                <label className="block text-sm font-medium text-gray-700">
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">
                   Official Email
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FaUser className="text-gray-400" />
-                  </div>
+                  <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
                   <input
                     type="email"
                     name="email"
                     value={hospitalData.email}
                     onChange={handleChange}
-                    placeholder="hospital@email.com"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="admin@cityhospital.com"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                     required
                   />
                 </div>
               </div>
 
               {/* Password Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Password */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-semibold text-gray-700">
                     Password
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaLock className="text-gray-400" />
-                    </div>
+                    <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
                     <input
                       type="password"
                       name="password"
                       value={hospitalData.password}
                       onChange={handleChange}
-                      placeholder="••••••••"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="At least 8 characters"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                       required
                       minLength="8"
                     />
@@ -181,20 +174,18 @@ const HospitalSignup = () => {
 
                 {/* Confirm Password */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-semibold text-gray-700">
                     Confirm Password
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <FaLock className="text-gray-400" />
-                    </div>
+                    <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
                     <input
                       type="password"
                       name="confirmPassword"
                       value={hospitalData.confirmPassword}
                       onChange={handleChange}
-                      placeholder="••••••••"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Re-enter password"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
                       required
                       minLength="8"
                     />
@@ -203,18 +194,15 @@ const HospitalSignup = () => {
               </div>
 
               {/* Terms Checkbox */}
-              <div className="flex items-center mb-6">
+              <div className="flex items-start gap-3 bg-blue-50 p-4 rounded-xl">
                 <input
                   id="terms"
                   type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer mt-0.5"
                   required
                 />
-                <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                  I certify this information is accurate and agree to the{" "}
-                  <Link to="/terms" className="font-medium text-blue-600 hover:text-blue-500">
-                    Terms & Conditions
-                  </Link>
+                <label htmlFor="terms" className="text-sm text-gray-700 cursor-pointer">
+                  I certify that the information provided is accurate and I agree to the Terms & Conditions and Privacy Policy.
                 </label>
               </div>
 
@@ -222,29 +210,37 @@ const HospitalSignup = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className="w-full py-3 px-4 rounded-xl text-white font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? (
-                  'Registering Hospital...'
-                ) : (
-                  <>
-                    Complete Registration <FaArrowRight className="ml-2" />
-                  </>
-                )}
+                {loading ? 'Registering...' : 'Complete Registration'}
               </button>
             </form>
 
             {/* Login Link */}
-            <div className="mt-6 text-center text-sm">
-              <p className="text-gray-600">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-3 bg-white text-gray-500 font-medium">OR</span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <p className="text-gray-600 text-sm">
                 Already registered?{' '}
-                <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
-                  Hospital Login
+                <Link to="/login" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+                  Sign in here
                 </Link>
               </p>
             </div>
           </div>
         </div>
+
+        {/* Footer */}
+        <p className="text-center text-gray-500 text-xs mt-6">
+          By registering, you agree to our Terms of Service and Privacy Policy
+        </p>
       </div>
     </div>
   );

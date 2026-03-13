@@ -3,10 +3,10 @@ import QRCode from "react-qr-code";
 import { db } from "../firebase";
 import { ref, set } from "firebase/database";
 import sendEmail from "../utils/email";
+import { FaBaby, FaCalendar, FaMars, FaUsers, FaEnvelope, FaStethoscope, FaSyringe } from "react-icons/fa";
 
 const GradientBG = ({ children }) => (
-  <div className="relative min-h-screen py-8 flex items-center justify-center">
-    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-100 via-white to-blue-200 -z-10" />
+  <div className="relative min-h-screen py-8 flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
     {children}
   </div>
 );
@@ -24,59 +24,71 @@ const VaccinationPage = ({
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-xl mt-8 border border-blue-200">
-      <h2 className="text-3xl font-bold text-center mb-6 text-blue-950">
-        Vaccination Schedule
-      </h2>
-      <table className="w-full border border-blue-300 rounded-lg overflow-hidden">
-        <thead className="bg-blue-900 text-white">
-          <tr>
-            <th className="py-3 px-4 border-b border-blue-300">Vaccine Name</th>
-            <th className="py-3 px-4 border-b border-blue-300">
-              Recommended Age
-            </th>
-            <th className="py-3 px-4 border-b border-blue-300">Cost</th>
-            <th className="py-3 px-4 border-b border-blue-300">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vaccinations.map((vaccine, i) => (
-            <tr key={i} className={i % 2 === 0 ? "bg-blue-50" : "bg-white"}>
-              <td className="py-2 px-4 border-b border-blue-200 text-center">
-                {vaccine.name}
-              </td>
-              <td className="py-2 px-4 border-b border-blue-200 text-center">
-                {vaccine.age}
-              </td>
-              <td className="py-2 px-4 border-b border-blue-200 text-center">
-                {vaccine.cost}
-              </td>
-              <td className="py-2 px-4 border-b border-blue-200 text-center">
-                <input
-                  type="checkbox"
-                  checked={vaccine.done}
-                  onChange={() => toggleStatus(i)}
-                  className="w-5 h-5 cursor-pointer accent-blue-900"
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="max-w-4xl mx-auto p-6 md:p-8">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 md:px-8 py-8">
+          <h2 className="text-3xl font-bold text-white flex items-center">
+            <FaSyringe className="mr-3 text-blue-200" />
+            Vaccination Schedule
+          </h2>
+          <p className="text-blue-100 text-sm mt-2">Track and manage your child's vaccinations</p>
+        </div>
 
-      <div className="flex justify-between mt-8">
-        <button
-          onClick={onBack}
-          className="bg-blue-950 text-white px-8 py-2 rounded-lg hover:bg-blue-900 transition font-semibold shadow"
-        >
-          Back
-        </button>
-        <button
-          onClick={onSubmit}
-          className="bg-blue-900 text-white px-8 py-2 rounded-lg hover:bg-blue-950 transition font-semibold shadow"
-        >
-          Register Child
-        </button>
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Vaccine Name</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recommended Age</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Cost</th>
+                <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {vaccinations.map((vaccine, i) => (
+                <tr 
+                  key={i} 
+                  className={`hover:bg-blue-50 transition-colors ${vaccine.done ? 'bg-green-50' : ''}`}
+                >
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <span className="inline-flex items-center">
+                      <FaSyringe className="w-4 h-4 text-blue-500 mr-2" />
+                      {vaccine.name}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{vaccine.age}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 font-medium">{vaccine.cost}</td>
+                  <td className="px-6 py-4 text-center">
+                    <input
+                      type="checkbox"
+                      checked={vaccine.done}
+                      onChange={() => toggleStatus(i)}
+                      className="w-5 h-5 accent-green-600 cursor-pointer rounded"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Footer Actions */}
+        <div className="bg-gray-50 border-t border-gray-200 px-6 md:px-8 py-6 flex flex-col sm:flex-row justify-between gap-4">
+          <button
+            onClick={onBack}
+            className="px-6 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Back
+          </button>
+          <button
+            onClick={onSubmit}
+            className="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
+          >
+            Complete Registration
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -92,215 +104,259 @@ const HomePage = ({ formData, setFormData, onNext }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-xl mt-8 border border-blue-200">
-      <h2 className="text-3xl font-bold text-center mb-8 text-blue-950">
-        Newborn Registration
-      </h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onNext();
-        }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"
-      >
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="childName"
-          >
-            Child Name
-          </label>
-          <input
-            type="text"
-            id="childName"
-            name="childName"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.childName}
-            onChange={handleChange}
-            required
-          />
+    <div className="max-w-4xl mx-auto p-6 md:p-8">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 md:px-8 py-8">
+          <h2 className="text-3xl font-bold text-white flex items-center">
+            <FaBaby className="mr-3 text-blue-200" />
+            Newborn Registration
+          </h2>
+          <p className="text-blue-100 text-sm mt-2">Complete the information to register your child</p>
         </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="dob"
-          >
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            id="dob"
-            name="dob"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.dob}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {/* Form */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext();
+          }}
+          className="p-6 md:p-8"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Child Name */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="childName"
+              >
+                <span className="flex items-center">
+                  Child Name
+                </span>
+              </label>
+              <input
+                type="text"
+                id="childName"
+                name="childName"
+                placeholder="e.g., Arjun Kumar"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.childName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="gender"
-          >
-            Gender
-          </label>
-          <select
-            id="gender"
-            name="gender"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+            {/* Date of Birth */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="dob"
+              >
+                <span className="flex items-center">
+                  Date of Birth
+                </span>
+              </label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.dob}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="motherName"
-          >
-            Mother Name
-          </label>
-          <input
-            type="text"
-            id="motherName"
-            name="motherName"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.motherName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            {/* Gender */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="gender"
+              >
+                <span className="flex items-center">
+                  Gender
+                </span>
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="motherPhone"
-          >
-            Mother Phone Number
-          </label>
-          <input
-            type="tel"
-            id="motherPhone"
-            name="motherPhone"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.motherPhone}
-            onChange={handleChange}
-            required
-            pattern="[0-9]{10}"
-            title="Enter 10-digit phone number"
-          />
-        </div>
+            {/* Birthplace */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="birthplace"
+              >
+                Birthplace
+              </label>
+              <input
+                type="text"
+                id="birthplace"
+                name="birthplace"
+                placeholder="e.g., City Hospital"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.birthplace}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="fatherName"
-          >
-            Father Name
-          </label>
-          <input
-            type="text"
-            id="fatherName"
-            name="fatherName"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.fatherName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            {/* Mother Name */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="motherName"
+              >
+                <span className="flex items-center">
+                  Mother Name
+                </span>
+              </label>
+              <input
+                type="text"
+                id="motherName"
+                name="motherName"
+                placeholder="e.g., Priya Kumar"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.motherName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="fatherPhone"
-          >
-            Father Phone Number
-          </label>
-          <input
-            type="tel"
-            id="fatherPhone"
-            name="fatherPhone"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.fatherPhone}
-            onChange={handleChange}
-            required
-            pattern="[0-9]{10}"
-            title="Enter 10-digit phone number"
-          />
-        </div>
+            {/* Mother Phone */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="motherPhone"
+              >
+                Mother Phone Number
+              </label>
+              <input
+                type="tel"
+                id="motherPhone"
+                name="motherPhone"
+                placeholder="e.g., 9876543210"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.motherPhone}
+                onChange={handleChange}
+                required
+                pattern="[0-9]{10}"
+                title="Enter 10-digit phone number"
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="birthplace"
-          >
-            Birthplace
-          </label>
-          <input
-            type="text"
-            id="birthplace"
-            name="birthplace"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.birthplace}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            {/* Father Name */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="fatherName"
+              >
+                <span className="flex items-center">
+                  Father Name
+                </span>
+              </label>
+              <input
+                type="text"
+                id="fatherName"
+                name="fatherName"
+                placeholder="e.g., Rajesh Kumar"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.fatherName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="parentEmail"
-          >
-            Parent Email
-          </label>
-          <input
-            type="email"
-            id="parentEmail"
-            name="parentEmail"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.parentEmail}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            {/* Father Phone */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="fatherPhone"
+              >
+                Father Phone Number
+              </label>
+              <input
+                type="tel"
+                id="fatherPhone"
+                name="fatherPhone"
+                placeholder="e.g., 9876543211"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.fatherPhone}
+                onChange={handleChange}
+                required
+                pattern="[0-9]{10}"
+                title="Enter 10-digit phone number"
+              />
+            </div>
 
 
-        <div>
-          <label
-            className="block font-semibold mb-2 text-blue-900"
-            htmlFor="doctorName"
-          >
-            Doctor Name (Delivery Attended)
-          </label>
-          <input
-            type="text"
-            id="doctorName"
-            name="doctorName"
-            className="w-full border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900 bg-blue-50"
-            value={formData.doctorName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            {/* Parent Email */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="parentEmail"
+              >
+                <span className="flex items-center">
+                  Parent Email
+                </span>
+              </label>
+              <input
+                type="email"
+                id="parentEmail"
+                name="parentEmail"
+                placeholder="e.g., parent@email.com"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.parentEmail}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div className="md:col-span-2 flex justify-center mt-4">
-          <button
-            type="submit"
-            className="w-2/3 bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-blue-950 transition duration-300 shadow"
-          >
-            Next
-          </button>
-        </div>
-      </form>
+            {/* Doctor Name */}
+            <div>
+              <label
+                className="block text-sm font-semibold text-gray-900 mb-2"
+                htmlFor="doctorName"
+              >
+                <span className="flex items-center">
+                  Doctor Name (Delivery Attended)
+                </span>
+              </label>
+              <input
+                type="text"
+                id="doctorName"
+                name="doctorName"
+                placeholder="e.g., Dr. Sharma"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                value={formData.doctorName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="mt-8 flex justify-center">
+            <button
+              type="submit"
+              className="w-full md:w-1/2 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all shadow-md hover:shadow-lg"
+            >
+              Next: Vaccination Schedule
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
@@ -319,7 +375,7 @@ const GetStarted = () => {
     birthplace: "",
     hospitalName: "",
     doctorName: "",
-    parentEmail: "", // 🔥 Add this
+    parentEmail: "",
   });
 
   const [vaccinations, setVaccinations] = useState([
@@ -381,43 +437,62 @@ const GetStarted = () => {
 
 
   const saveTodbAndGenerateQR = async () => {
-    const childId = Date.now().toString();
-    const data = {
-      ...formData,
-      vaccinations,
-      childId,
-    };
+    try {
+      const childId = Date.now().toString();
+      const data = {
+        ...formData,
+        vaccinations,
+        childId,
+      };
 
-    // ✅ Save to Firebase Realtime db
-    set(ref(db, "children/" + childId), data)
-      .then(() => {
-        console.log("Data saved successfully!");
-        setChildId(childId);
-        setQrValue(JSON.stringify(data));
-      })
-      .catch((error) => {
-        console.error("Error saving data:", error);
-      });
+      console.log("Attempting to save data:", data);
 
-    await sendEmail({
-      name: formData.childName,
-      to_email: formData.parentEmail,
-      message: `Your child ${formData.childName}'s vaccination card has been successfully registered. View the QR code or visit the hospital to check updates. https://h4-b.vercel.app/child/1750487957444`,
-    });
+      // Save to Realtime Database
+      await set(ref(db, "children/" + childId), data);
+      console.log("Data saved successfully!");
+      
+      // Generate QR code URL with all child data (URL encoded)
+      const qrData = JSON.stringify(data);
+      const encodedQrData = encodeURIComponent(qrData);
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodedQrData}`;
+      
+      // Update state
+      setChildId(childId);
+      setQrValue(qrData);
+
+      // Send email after successful save (non-critical)
+      try {
+        await sendEmail({
+          name: formData.childName,
+          to_email: formData.parentEmail,
+          message: `Your child's vaccination card has been successfully registered.`,
+          childId: childId,
+          qrCodeUrl: qrCodeUrl,
+        });
+        console.log("Email sent successfully!");
+      } catch (emailError) {
+        console.warn("Email sending failed, but registration is complete:", emailError);
+      }
+    } catch (error) {
+      console.error("Full error object:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      alert(`Registration failed: ${error.message || "Unknown error"}`);
+    }
   };
 
 
   return (
     <GradientBG>
       <div className="w-full">
-        {step === 1 && (
+        {!qrValue && step === 1 && (
           <HomePage
             formData={formData}
             setFormData={setFormData}
             onNext={handleNext}
           />
         )}
-        {step === 2 && (
+        {!qrValue && step === 2 && (
           <VaccinationPage
             vaccinations={vaccinations}
             setVaccinations={setVaccinations}
@@ -427,16 +502,55 @@ const GetStarted = () => {
         )}
 
         {qrValue && (
-          <div className="max-w-3xl mx-auto mt-10 p-6 bg-blue-50 rounded-2xl text-center shadow-lg border border-blue-200">
-            <h3 className="text-2xl font-semibold mb-4 text-blue-950">
-              Generated QR Code
-            </h3>
-            <div className="inline-block bg-white p-4 rounded shadow-md">
-              <QRCode value={qrValue} size={180} />
+          <div className="max-w-2xl mx-auto mt-8 p-6 md:p-8">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 md:px-8 py-8 text-center">
+                <h3 className="text-3xl font-bold text-white">
+                  Registration Complete
+                </h3>
+                <p className="text-green-100 text-sm mt-2">Your child's vaccination card has been successfully registered</p>
+              </div>
+              
+              <div className="p-8 text-center">
+                <p className="text-sm text-gray-600 mb-6">Scan this QR code to access vaccination records</p>
+                <div className="inline-block bg-white p-4 rounded-lg border border-gray-200 shadow-md">
+                  <QRCode value={qrValue} size={200} level="H" />
+                </div>
+                
+                <div className="mt-8 bg-blue-50 rounded-lg p-6 border border-blue-200">
+                  <p className="text-gray-700 text-sm mb-4">
+                    <strong className="text-gray-900 block mb-2">Child ID:</strong> 
+                    <span className="text-lg font-monospace text-blue-600 break-all">{childId}</span>
+                  </p>
+                  <p className="text-gray-600 text-xs">Save this ID for future reference. Use it to access and update vaccination records.</p>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={() => {
+                      setQrValue("");
+                      setStep(1);
+                      setFormData({
+                        childName: "",
+                        dob: "",
+                        gender: "",
+                        motherName: "",
+                        motherPhone: "",
+                        fatherName: "",
+                        fatherPhone: "",
+                        birthplace: "",
+                        hospitalName: "",
+                        doctorName: "",
+                        parentEmail: "",
+                      });
+                    }}
+                    className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Register Another Child
+                  </button>
+                </div>
+              </div>
             </div>
-            <p className="mt-4 text-lg text-blue-900">
-              <strong>Child ID:</strong> {childId}
-            </p>
           </div>
         )}
       </div>

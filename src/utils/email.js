@@ -1,11 +1,12 @@
 import emailjs from 'emailjs-com';
 
-const sendEmail = async ({ name, to_email, message }) => {
+const sendEmail = async ({ name, to_email, message, childId, qrCodeUrl }) => {
   const templateParams = {
-    user_name: name,
-    user_email: to_email,
+    name: name,
     to_email: to_email,
     message: message,
+    childId: childId || 'N/A',
+    qrCodeUrl: qrCodeUrl || '',
   };
 
   try {

@@ -1,8 +1,6 @@
 import React, { useRef } from 'react';
 import printJS from 'print-js';
-import { FaFilePdf, FaUser, FaCalendarAlt, FaVenusMars, FaMapMarkerAlt, FaHospital, FaUserMd, FaPhone, FaCheck } from 'react-icons/fa';
-import logo from '../assets/Logo.png';
-import defaultProfile from '../assets/3.jpg';
+import { FaFilePdf } from 'react-icons/fa';
 
 // Vaccine schedule with specific ages
 const vaccineSchedule = {
@@ -101,106 +99,65 @@ export default function ChildProfile({ data }) {
         className="p-8 text-gray-800"
       >
         {/* Header */}
-        <header className="flex flex-col md:flex-row items-center justify-between print-header pb-6 mb-8">
-          <div className="flex items-center mb-4 md:mb-0">
-            <img src={logo} alt="Logo" className="h-14 mr-4" />
+        <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg print-header pb-8 mb-8 px-6 py-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{childName}'s Vaccination Record</h1>
-              <p className="text-sm text-gray-500">ID: {childId}</p>
+              <h1 className="text-3xl font-bold">{childName}'s Vaccination Record</h1>
+              <p className="text-blue-100 mt-2">Child ID: <span className="font-semibold">{childId}</span></p>
             </div>
-          </div>
-          <div className="flex items-center">
-            <img
-              src={defaultProfile}
-              alt="Profile"
-              className="w-16 h-16 rounded-full border-2 border-blue-100 object-cover"
-            />
           </div>
         </header>
 
         {/* Child Info */}
         <section className="mb-10">
-          <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200 flex items-center">
-            <FaUser className="mr-2 text-blue-600" />
+          <h3 className="text-xl font-bold mb-6 pb-3 border-b border-gray-300 text-gray-800">
             Child Information
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="flex items-start">
-              <FaCalendarAlt className="mt-1 mr-3 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-500">Date of Birth</p>
-                <p className="font-medium">{dob}</p>
-              </div>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-sm text-gray-600 font-semibold">Date of Birth</p>
+              <p className="text-lg font-semibold text-gray-900 mt-2">{dob}</p>
             </div>
-            <div className="flex items-start">
-              <FaVenusMars className="mt-1 mr-3 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-500">Gender</p>
-                <p className="font-medium">{gender}</p>
-              </div>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-sm text-gray-600 font-semibold">Gender</p>
+              <p className="text-lg font-semibold text-gray-900 mt-2">{gender}</p>
             </div>
-            <div className="flex items-start">
-              <FaMapMarkerAlt className="mt-1 mr-3 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-500">Birthplace</p>
-                <p className="font-medium">{birthplace}</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <FaHospital className="mt-1 mr-3 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-500">Hospital</p>
-                <p className="font-medium">{hospitalName}</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <FaUserMd className="mt-1 mr-3 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-500">Doctor</p>
-                <p className="font-medium">{doctorName}</p>
-              </div>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-sm text-gray-600 font-semibold">Birthplace</p>
+              <p className="text-lg font-semibold text-gray-900 mt-2">{birthplace}</p>
             </div>
           </div>
         </section>
 
         {/* Parent Info */}
         <section className="mb-10">
-          <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200 flex items-center">
-            <FaUser className="mr-2 text-blue-600" />
+          <h3 className="text-xl font-bold mb-6 pb-3 border-b border-gray-300 text-gray-800">
             Parent Information
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Mother</h4>
-              <div className="flex items-start">
-                <FaUser className="mt-1 mr-3 text-blue-500" />
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="font-bold text-lg text-gray-800 mb-4">Mother</h4>
+              <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-gray-500">Name</p>
-                  <p className="font-medium">{motherName}</p>
+                  <p className="text-sm text-gray-600 font-semibold">Name</p>
+                  <p className="text-gray-900 mt-1">{motherName}</p>
                 </div>
-              </div>
-              <div className="flex items-start mt-3">
-                <FaPhone className="mt-1 mr-3 text-blue-500" />
                 <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="font-medium">{motherPhone}</p>
+                  <p className="text-sm text-gray-600 font-semibold">Phone</p>
+                  <p className="text-gray-900 mt-1">{motherPhone}</p>
                 </div>
               </div>
             </div>
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Father</h4>
-              <div className="flex items-start">
-                <FaUser className="mt-1 mr-3 text-blue-500" />
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="font-bold text-lg text-gray-800 mb-4">Father</h4>
+              <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-gray-500">Name</p>
-                  <p className="font-medium">{fatherName}</p>
+                  <p className="text-sm text-gray-600 font-semibold">Name</p>
+                  <p className="text-gray-900 mt-1">{fatherName}</p>
                 </div>
-              </div>
-              <div className="flex items-start mt-3">
-                <FaPhone className="mt-1 mr-3 text-blue-500" />
                 <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="font-medium">{fatherPhone}</p>
+                  <p className="text-sm text-gray-600 font-semibold">Phone</p>
+                  <p className="text-gray-900 mt-1">{fatherPhone}</p>
                 </div>
               </div>
             </div>
@@ -208,46 +165,50 @@ export default function ChildProfile({ data }) {
         </section>
 
         {/* Vaccination Progress */}
-        <div className="bg-blue-50 rounded-lg p-4 mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <h4 className="font-medium text-gray-700">Vaccination Progress</h4>
-            <p className="font-semibold">
-              <span className="completed">{completedVaccines}</span> / {totalVaccines} completed
+        <div className="bg-gray-50 rounded-lg p-6 mb-8 border border-gray-300">
+          <div className="flex justify-between items-center mb-4">
+            <h4 className="font-bold text-gray-800 text-lg">Vaccination Progress</h4>
+            <p className="font-bold text-lg">
+              <span className="text-blue-600">{completedVaccines}</span> <span className="text-gray-600">/ {totalVaccines}</span>
             </p>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2.5">
+          <div className="w-full bg-gray-200 rounded-full h-3">
             <div
-              className="bg-blue-600 h-2.5 rounded-full"
+              className="bg-blue-600 h-3 rounded-full transition-all duration-500"
               style={{ width: `${(completedVaccines / totalVaccines) * 100}%` }}
             ></div>
           </div>
+          <p className="text-sm text-gray-600 mt-3">
+            {completedVaccines === totalVaccines 
+              ? 'All vaccinations completed' 
+              : `${totalVaccines - completedVaccines} vaccine(s) pending`}
+          </p>
         </div>
 
         {/* Vaccination Table */}
         <section>
-          <h3 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200 flex items-center">
-            <FaCheck className="mr-2 text-blue-600" />
+          <h3 className="text-xl font-bold mb-6 pb-3 border-b border-gray-300 text-gray-800">
             Vaccination Details
           </h3>
           <div className="overflow-x-auto">
             <table className="vaccine-table w-full">
               <thead>
-                <tr className="bg-gray-50 text-left text-gray-700">
-                  <th className="py-3 px-4 font-medium">Vaccine</th>
-                  <th className="py-3 px-4 font-medium">Recommended Age</th>
-                  <th className="py-3 px-4 font-medium">Status</th>
+                <tr className="bg-gray-100">
+                  <th className="py-3 px-4 font-bold text-left text-gray-800">Vaccine</th>
+                  <th className="py-3 px-4 font-bold text-left text-gray-800">Recommended Age</th>
+                  <th className="py-3 px-4 font-bold text-left text-gray-800">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {vaccinations.map((vaccine, index) => (
-                  <tr key={index} className={vaccine.done ? 'bg-green-50' : ''}>
-                    <td className="py-3 px-4 font-medium">{vaccine.name}</td>
-                    <td className="py-3 px-4">
+                  <tr key={index} className={vaccine.done ? 'bg-green-50' : 'hover:bg-gray-50'}>
+                    <td className="py-3 px-4 text-gray-900">{vaccine.name}</td>
+                    <td className="py-3 px-4 text-gray-700">
                       {vaccineSchedule[vaccine.name] ? (
-                        <span className={!vaccine.done && isOverdue(vaccine.name) ? 'age-warning' : ''}>
+                        <span className={!vaccine.done && isOverdue(vaccine.name) ? 'text-red-600 font-semibold' : ''}>
                           {vaccineSchedule[vaccine.name]}
                           {!vaccine.done && isOverdue(vaccine.name) && (
-                            <span className="text-xs ml-2">(Overdue)</span>
+                            <span className="text-xs ml-2 text-red-600">(Overdue)</span>
                           )}
                         </span>
                       ) : (
@@ -256,13 +217,9 @@ export default function ChildProfile({ data }) {
                     </td>
                     <td className="py-3 px-4">
                       {vaccine.done ? (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          <FaCheck className="mr-1" /> Completed
-                        </span>
+                        <span className="text-sm font-semibold text-green-700">Completed</span>
                       ) : (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                          Pending
-                        </span>
+                        <span className="text-sm font-semibold text-yellow-700">Pending</span>
                       )}
                     </td>
                   </tr>
@@ -274,12 +231,12 @@ export default function ChildProfile({ data }) {
       </div>
 
       {/* Print Button */}
-      <div className="px-8 pb-8">
+      <div className="px-8 py-8 bg-gray-50 border-t border-gray-300">
         <button
           onClick={handlePrint}
-          className="flex items-center px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
+          className="flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition shadow-md"
         >
-          <FaFilePdf className="mr-2" /> Download Vaccination Record
+          <FaFilePdf className="mr-2" size={18} /> Download Vaccination Record
         </button>
       </div>
     </div>
