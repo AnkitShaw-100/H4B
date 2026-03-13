@@ -45,8 +45,6 @@ export default function ChildProfile({ data }) {
     dob,
     gender,
     birthplace,
-    hospitalName,
-    doctorName,
     motherName,
     motherPhone,
     fatherName,

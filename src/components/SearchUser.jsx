@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getChildByChildId } from '../utils/findUser';
 import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaSpinner } from 'react-icons/fa';
 
 function SearchUser() {
   const [input, setInput] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [, setUserData] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
