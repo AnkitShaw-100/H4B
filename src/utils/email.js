@@ -1,4 +1,4 @@
-import emailjs from 'emailjs-com';
+import { send } from '@emailjs/browser';
 
 const sendEmail = async ({ name, to_email, message, childId, qrCodeUrl }) => {
   const templateParams = {
@@ -10,7 +10,7 @@ const sendEmail = async ({ name, to_email, message, childId, qrCodeUrl }) => {
   };
 
   try {
-    const result = await emailjs.send(
+    const result = await send(
       import.meta.env.VITE_EMAILJS_SERVICE_ID,
       import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       templateParams,
