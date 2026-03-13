@@ -27,7 +27,7 @@ const testimonials = [
 ];
 
 const Testimonial = () => {
-  const navigate = useNavigate(); // ✅ This line was missing
+  const navigate = useNavigate(); // This line was missing
 
   return (
     <div className="bg-blue-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -91,7 +91,7 @@ const Testimonial = () => {
           </p>
           <button
             type="button"
-            onClick={() => navigate("/signup")} // ✅ This works now
+            onClick={() => navigate("/signup")} // This works now
             className="inline-flex items-center px-4 py-2 border border-blue-600 text-sm font-medium rounded text-blue-600 hover:bg-blue-50 transition-colors"
           >
             Create your account

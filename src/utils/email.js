@@ -16,9 +16,9 @@ const sendEmail = async ({ name, to_email, message, childId, qrCodeUrl }) => {
       templateParams,
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     );
-    console.log('✅ Email sent successfully:', result);
+    console.log('Email sent successfully:', result);
   } catch (error) {
-    console.error('❌ Failed to send email:', error);
+    console.error('Failed to send email:', error);
   }
 };
 

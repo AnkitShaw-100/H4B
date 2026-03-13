@@ -1,10 +1,10 @@
-# 🛡️ Child Vaccination Portal
+# Child Vaccination Portal
 
 A modern, responsive web application to **digitally manage child vaccination records**, spread awareness, and ensure timely immunization — built using **React**, **Firebase**, and **Tailwind CSS**.
 
 ---
 
-## 📚 Overview
+## Overview
 
 The Child Vaccination Portal helps parents and healthcare workers:
 
@@ -15,39 +15,39 @@ The Child Vaccination Portal helps parents and healthcare workers:
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔹 Core Services
+### Core Services
 
-* **📄 QR-Based Vaccine Records**
+* **QR-Based Vaccine Records**
   Generate and download vaccination history via a scannable QR code.
 
-* **💰 Affordable Vaccines**
+* **Affordable Vaccines**
   Low-cost, government-supported vaccines accessible to all families.
 
-* **📣 Vaccine Awareness**
+* **Vaccine Awareness**
   Informational resources on vaccine schedules, importance, and benefits.
 
-* **💬 AI Chatbot Support**
+* **AI Chatbot Support**
   Chatbase-powered assistant to answer post-vaccine symptom concerns and common questions.
 
-* **💉 Immunization Tracking**
+* **Immunization Tracking**
   Tracks vaccination doses, reminders, and supports complete immunization coverage.
 
 ---
 
-## 💡 Key Highlights
+## Key Highlights
 
-* ✅ Fully responsive layout using **Tailwind CSS**
-* 🔄 Real-time syncing of data via **Firebase Realtime Database**
-* 🧠 Smart components:
+* Fully responsive layout using **Tailwind CSS**
+* Real-time syncing of data via **Firebase Realtime Database**
+* Smart components:
 
   * QR code generation
   * Appointment scheduling
   * Vaccine history logs
-* 🤖 Embedded **Chatbase chatbot** to help answer parent concerns instantly
-* 📊 **Doctor Dashboard** with child stats, vaccine logs, and appointments
-* 🔔 Upcoming features:
+* Embedded **Chatbase chatbot** to help answer parent concerns instantly
+* **Doctor Dashboard** with child stats, vaccine logs, and appointments
+* Upcoming features:
 
   * Email/SMS alerts
   * Calendar-based scheduling
@@ -55,7 +55,7 @@ The Child Vaccination Portal helps parents and healthcare workers:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology        | Purpose                              |
 | ----------------- | ------------------------------------ |
@@ -70,7 +70,7 @@ The Child Vaccination Portal helps parents and healthcare workers:
 
 ---
 
-## 📦 Installation
+## Installation
 
 Install all project dependencies with the following command:
 
@@ -81,7 +81,7 @@ emailjs-com qrcode.react framer-motion print-js
 
 ---
 
-## 🧪 Setup & Run
+## Setup & Run
 
 Start your development server with:
 
@@ -90,7 +90,7 @@ npm run dev
 ```
 ---
 
-## 📌 License
+## License
 
 This project is licensed under the MIT License.
 Feel free to use, contribute, and expand the system.
